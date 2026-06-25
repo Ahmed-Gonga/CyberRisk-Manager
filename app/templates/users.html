@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}
+<h1 class="h2 mb-3">User Roles</h1>
+<div class="alert alert-primary">Admin-only view for testing role-based access control. Demo users are seeded with hashed passwords.</div>
+<div class="card shadow-sm"><div class="table-responsive"><table class="table table-hover mb-0 align-middle"><thead><tr><th>Username</th><th>Role</th><th>Purpose</th></tr></thead><tbody>
+{% for u in users %}<tr><td><strong>{{ u.username }}</strong></td><td><span class="badge bg-dark">{{ u.role }}</span></td><td>{% if u.role == 'Admin' %}Full system administration{% elif u.role == 'Risk Manager' %}Manage assets, risks, controls, and findings{% elif u.role == 'Auditor' %}Review registers, manage findings, view reports and logs{% else %}Read-only dashboard and register access{% endif %}</td></tr>{% endfor %}
+</tbody></table></div></div>
+<div class="card shadow-sm mt-4"><div class="card-header fw-bold">Demo Credentials</div><div class="card-body"><ul class="mb-0"><li><code>admin / admin123</code> — Admin</li><li><code>auditor / auditor123</code> — Auditor</li><li><code>riskmanager / risk123</code> — Risk Manager</li><li><code>viewer / viewer123</code> — Viewer</li></ul></div></div>
+{% endblock %}

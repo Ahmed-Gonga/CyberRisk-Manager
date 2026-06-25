@@ -1,0 +1,27 @@
+{% extends "base.html" %}{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h1 class="h2">Security Risk Dashboard</h1><p class="text-muted mb-0">Executive risk, GRC, and IT audit overview.</p></div>{% if can_view_reports %}<a href="/reports/audit" class="btn btn-danger">Generate Audit Report</a>{% endif %}</div>
+<div class="row g-3 mb-4">
+{% for label, value in [("Total Assets", stats.total_assets),("Total Risks", stats.total_risks),("Critical Risks", stats.critical_risks),("Open Risks", stats.open_risks),("Overdue Risks", stats.overdue_risks),("Open Findings", stats.open_findings),("Implemented Controls", stats.implemented_controls)] %}
+<div class="col-sm-6 col-lg"><div class="card shadow-sm stat-card"><div class="card-body"><div class="text-muted small">{{ label }}</div><div class="display-6 fw-bold">{{ value }}</div></div></div></div>
+{% endfor %}
+</div>
+<div class="row g-4 mb-4">
+  <div class="col-lg-6"><div class="card shadow-sm h-100"><div class="card-header fw-bold">Executive Metrics</div><div class="card-body"><div class="row g-3"><div class="col-md-6"><div class="metric-box"><div class="text-muted small">Risk Reduction</div><div class="h2">{{ stats.risk_reduction }}%</div></div></div><div class="col-md-6"><div class="metric-box"><div class="text-muted small">Control Coverage</div><div class="h2">{{ stats.control_coverage }}%</div></div></div><div class="col-md-6"><div class="metric-box"><div class="text-muted small">Open Findings</div><div class="h2">{{ stats.open_findings }}</div></div></div><div class="col-md-6"><div class="metric-box"><div class="text-muted small">Closed Findings</div><div class="h2">{{ stats.closed_findings }}</div></div></div></div></div></div></div>
+  <div class="col-lg-6"><div class="card shadow-sm h-100"><div class="card-header fw-bold">Risk Severity Overview</div><div class="card-body">{% for sev,count in severity_counts.items() %}<div class="d-flex justify-content-between mb-2"><span class="badge severity-{{ sev|lower }}">{{ sev }}</span><strong>{{ count }}</strong></div><div class="progress mb-3"><div class="progress-bar" style="width: {{ count * 20 }}%"></div></div>{% endfor %}</div></div></div>
+</div>
+<div class="row g-4 mb-4">
+  <div class="col-lg-6"><div class="card shadow-sm h-100"><div class="card-header fw-bold">Risk Heatmap</div><div class="card-body"><div class="heatmap"><div class="heatmap-y">Impact</div><div>{% for row in heatmap %}<div class="d-flex align-items-center mb-1"><span class="heatmap-label">{{ row.impact }}</span>{% for cell in row.cells %}<div class="heat-cell heat-{{ cell.severity|lower }}" title="L{{ cell.likelihood }} x I{{ cell.impact }} = {{ cell.score }}">{{ cell.count if cell.count else '' }}</div>{% endfor %}</div>{% endfor %}<div class="d-flex align-items-center mt-2"><span class="heatmap-label"></span>{% for l in [1,2,3,4,5] %}<div class="heatmap-axis">{{ l }}</div>{% endfor %}</div><div class="text-center small text-muted">Likelihood</div></div></div></div></div></div>
+  <div class="col-lg-6"><div class="card shadow-sm h-100"><div class="card-header fw-bold">Dashboard Charts</div><div class="card-body"><canvas id="severityChart" height="110"></canvas><hr><canvas id="controlsChart" height="110"></canvas></div></div></div>
+</div>
+<div class="card shadow-sm"><div class="card-header fw-bold">Recent Risks</div><div class="table-responsive"><table class="table table-hover mb-0"><thead><tr><th>Risk</th><th>Score</th><th>Severity</th><th>Status</th><th>Owner</th><th>Treatment</th></tr></thead><tbody>{% for r in risks %}<tr><td>{{ r.title }}</td><td>{{ r.calculated_risk_score }}</td><td><span class="badge severity-{{ r.severity|lower }}">{{ r.severity }}</span></td><td>{{ r.status }}</td><td>{{ r.risk_owner }}</td><td>{{ r.treatment_plan }}</td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}
+{% block scripts %}
+<script>
+const severityLabels = {{ severity_counts.keys()|list|tojson }};
+const severityData = {{ severity_counts.values()|list|tojson }};
+const controlLabels = {{ control_counts.keys()|list|tojson }};
+const controlData = {{ control_counts.values()|list|tojson }};
+new Chart(document.getElementById('severityChart'), {type:'pie', data:{labels:severityLabels, datasets:[{data:severityData}]}});
+new Chart(document.getElementById('controlsChart'), {type:'bar', data:{labels:controlLabels, datasets:[{label:'Controls by Status', data:controlData}]}, options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, ticks:{precision:0}}}}});
+</script>
+{% endblock %}

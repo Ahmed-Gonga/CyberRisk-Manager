@@ -1,0 +1,12 @@
+services:
+  cyberrisk-manager:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      SECRET_KEY: "change-this-secret-in-production"
+      DATABASE_URL: "sqlite:///./data/cyberrisk.db"
+    volumes:
+      - cyberrisk_data:/code/data
+volumes:
+  cyberrisk_data:

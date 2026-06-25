@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block content %}
+<h1 class="h2">{{ 'Edit' if risk else 'New' }} Risk</h1>
+<form method="post" class="card card-body shadow-sm">
+<div class="row g-3">
+  <div class="col-md-8"><label class="form-label">Title</label><input name="title" class="form-control" value="{{ risk.title if risk else '' }}" required></div>
+  <div class="col-md-4"><label class="form-label">Related Asset</label><select name="asset_id" class="form-select"><option value="">Unassigned</option>{% for a in assets %}<option value="{{ a.id }}" {% if risk and risk.asset_id==a.id %}selected{% endif %}>{{ a.name }}</option>{% endfor %}</select></div>
+  <div class="col-md-6"><label class="form-label">Threat</label><input name="threat" class="form-control" value="{{ risk.threat if risk else '' }}" required></div>
+  <div class="col-md-6"><label class="form-label">Vulnerability</label><input name="vulnerability" class="form-control" value="{{ risk.vulnerability if risk else '' }}" required></div>
+  <div class="col-md-2"><label class="form-label">Likelihood</label><input name="likelihood" type="number" min="1" max="5" class="form-control" value="{{ risk.likelihood if risk else 3 }}" required></div>
+  <div class="col-md-2"><label class="form-label">Impact</label><input name="impact" type="number" min="1" max="5" class="form-control" value="{{ risk.impact if risk else 3 }}" required></div>
+  <div class="col-md-3"><label class="form-label">Status</label><select name="status" class="form-select">{% for s in statuses %}<option {% if risk and risk.status==s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></div>
+  <div class="col-md-3"><label class="form-label">Treatment Plan</label><select name="treatment_plan" class="form-select">{% for t in treatments %}<option {% if risk and risk.treatment_plan==t %}selected{% endif %}>{{ t }}</option>{% endfor %}</select></div>
+  <div class="col-md-4"><label class="form-label">Risk Owner</label><input name="risk_owner" class="form-control" value="{{ risk.risk_owner if risk else '' }}" placeholder="Security Team"></div>
+  <div class="col-md-4"><label class="form-label">Target Remediation Date</label><input name="target_date" type="date" class="form-control" value="{{ risk.target_date if risk and risk.target_date else '' }}"></div>
+  <div class="col-12"><label class="form-label">Recommendation</label><textarea name="recommendation" class="form-control" rows="3">{{ risk.recommendation if risk else '' }}</textarea></div>
+</div>
+<div class="mt-3"><button class="btn btn-primary">Save</button><a href="/risks" class="btn btn-link">Cancel</a></div>
+</form>
+{% endblock %}
