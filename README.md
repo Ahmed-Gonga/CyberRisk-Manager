@@ -1,263 +1,409 @@
-# CyberRisk Manager
+# CyberRisk Manager Enterprise
 
-![CI](https://github.com/Ahmed-Gonga/CyberRisk-Manager/actions/workflows/ci.yml/badge.svg)
+> **A Production-Style Cyber Risk Management, IT Audit, and Governance, Risk & Compliance (GRC) Platform**
+
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Enterprise-green)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-ORM-red)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![License](https://img.shields.io/badge/License-MIT-success)
 
 **Author:** Ahmed Wahba
 
-CyberRisk Manager is a professional cyber risk management web application built with FastAPI, SQLAlchemy, SQLite, Bootstrap, Docker, and GitHub Actions.
+CyberRisk Manager Enterprise is a production-style cybersecurity governance, enterprise risk management, and IT audit platform developed using FastAPI.
 
-The project is designed for a cybersecurity portfolio and demonstrates practical workflows used in IT Security, IT Audit, GRC, and Cybersecurity Consulting: asset inventory, risk assessment, control tracking, audit findings, risk treatment, reporting, API access, and audit logging.
+The application demonstrates enterprise-grade implementation of cyber risk management workflows including asset inventory, risk assessment, audit findings management, security controls, executive reporting, REST APIs, JWT authentication, Role-Based Access Control (RBAC), and audit logging.
 
----
-
-## Key Capabilities
-
-- Secure local authentication with hashed passwords
-- Session-based browser authentication
-- JWT authentication for REST API access
-- Role-based access control with Admin, Auditor, Risk Manager, and Viewer demo users
-- Asset inventory management
-- Risk register with likelihood, impact, score, severity, owners, due dates, and treatment plans
-- 5x5 risk heatmap
-- Security control tracking with ISO 27001 and NIST CSF mappings
-- Audit findings module for IT audit-style observations
-- Overdue risk and finding indicators
-- Executive dashboard metrics
-- Dashboard charts for severity and control status
-- PDF audit report generation
-- Audit logging for user and data actions
-- Dockerized deployment
-- GitHub Actions CI pipeline
-- Pytest test suite
+This project was built as a professional portfolio application targeting Cybersecurity Engineering, Governance, Risk & Compliance (GRC), Information Security, Security Consulting, and IT Audit roles.
 
 ---
 
-## Demo Credentials and RBAC Roles
+# Enterprise Features
 
-| Username | Password | Role | Access Summary |
-|---|---|---|---|
-| admin | admin123 | Admin | Full system access, deletes, reports, audit logs, and user role overview |
-| auditor | auditor123 | Auditor | Review registers, manage audit findings, view reports, and inspect audit logs |
-| riskmanager | risk123 | Risk Manager | Manage assets, risks, controls, audit findings, and reports |
-| viewer | viewer123 | Viewer | Read-only access to dashboard and registers |
+## Authentication & Security
 
-The UI hides unauthorized actions, and server-side RBAC returns `403 Forbidden` if a user manually attempts to access a protected route.
+* JWT Authentication
+* Secure Password Hashing
+* Session Authentication
+* Role-Based Access Control (RBAC)
+* Protected Routes
+* Audit Logging
+* Environment-Based Configuration
 
----
+Supported Roles
 
-## Screenshots
-
-### Security Dashboard
-
-![Dashboard](screenshots/dashboard.png)
-
-### Asset Register
-
-![Assets](screenshots/assets.png)
-
-### Risk Register
-
-![Risks](screenshots/risks.png)
-
-### Security Controls
-
-![Controls](screenshots/controls.png)
-
-### Audit Findings
-
-![Audit Findings](screenshots/audit-findings.png)
-
-### Audit Report
-
-![Audit Report](screenshots/audit-report.png)
+* Admin
+* Auditor
+* Risk Manager
+* Viewer
 
 ---
 
-## Risk Methodology
+## Executive Dashboard
 
-CyberRisk Manager uses a simple 5x5 risk scoring model:
+* Asset Inventory Overview
+* Enterprise Risk Overview
+* Critical Risk Monitoring
+* Open Risk Tracking
+* Implemented Controls
+* Open Findings
+* Closed Findings
+* Executive Metrics
+* Risk Heatmap
+* Risk Severity Distribution
+* Control Status Dashboard
 
-```text
+---
+
+## Asset Management
+
+Manage organizational assets including
+
+* Create Assets
+* Update Assets
+* Delete Assets
+* Asset Ownership
+* Criticality Classification
+* Asset Location
+
+Criticality Levels
+
+* Low
+* Medium
+* High
+* Critical
+
+---
+
+## Enterprise Risk Register
+
+Each risk includes
+
+* Related Asset
+* Threat
+* Vulnerability
+* Likelihood
+* Impact
+* Automated Risk Score
+* Severity Classification
+* Risk Owner
+* Treatment Plan
+* Target Remediation Date
+* Overdue Detection
+* Recommendations
+
+### Risk Score Formula
+
+```
 Risk Score = Likelihood × Impact
 ```
 
 | Score | Severity |
-|---|---|
-| 1-4 | Low |
-| 5-9 | Medium |
-| 10-16 | High |
-| 17-25 | Critical |
-
-Each risk can also include:
-
-- Risk owner
-- Target remediation date
-- Treatment plan: Avoid, Mitigate, Transfer, or Accept
-- Status: Open, In Progress, Mitigated, or Accepted
+| ----- | -------- |
+| 1–4   | Low      |
+| 5–9   | Medium   |
+| 10–16 | High     |
+| 17–25 | Critical |
 
 ---
 
-## GRC and IT Audit Features
+## Security Controls
 
-### ISO 27001 Mapping
+* ISO 27001 Mapping
+* NIST Cybersecurity Framework Mapping
+* Framework References
+* Control Ownership
+* Evidence Tracking
+* Implementation Status
 
-Controls include basic ISO 27001 references such as:
+Example Controls
 
-- A.5.17 Authentication Information
-- A.5.15 Access Control
-- A.8.15 Logging
-- A.8.13 Backup
-- A.8.28 Secure Coding
+* Multi-Factor Authentication
+* Role-Based Access Control
+* Security Logging & Monitoring
+* Secure Coding Review
+* Backup & Recovery
 
-### NIST CSF Mapping
+---
 
-Controls also include NIST CSF function/category-style references such as:
+## Audit Findings
 
-- PR.AC — Protect / Access Control
-- DE.CM — Detect / Continuous Monitoring
-- PR.IP — Protect / Information Protection Processes
-- RC.RP — Recover / Recovery Planning
+Track audit observations including
 
-### Audit Findings
+* Finding ID
+* Observation
+* Risk Rating
+* Recommendation
+* Owner
+* Due Date
+* Status
+* Overdue Detection
 
-The Audit Findings module includes:
+---
 
-- Finding ID
-- Observation
-- Risk rating
-- Recommendation
-- Owner
-- Due date
-- Status
-- Related risk
+## Audit Logging
 
-This mirrors common IT audit and cybersecurity consulting deliverables.
+Every security-sensitive action is recorded.
+
+Examples
+
+* User Login
+* Asset Created
+* Asset Updated
+* Asset Deleted
+* Risk Created
+* Risk Updated
+* Control Modified
+* Finding Closed
 
 ---
 
 ## REST API
 
-JWT-based API access is available for core resources.
+The application exposes RESTful APIs for
 
-### Get token
+* Authentication
+* Assets
+* Risks
+* Controls
+* Audit Findings
+* Dashboard
 
-```bash
-curl -X POST http://127.0.0.1:8000/api/token \
-  -F "username=admin" \
-  -F "password=admin123"
+Swagger Documentation
+
 ```
-
-### Example API calls
-
-```bash
-curl http://127.0.0.1:8000/api/assets \
-  -H "Authorization: Bearer <TOKEN>"
-
-curl http://127.0.0.1:8000/api/risks \
-  -H "Authorization: Bearer <TOKEN>"
-
-curl http://127.0.0.1:8000/api/controls \
-  -H "Authorization: Bearer <TOKEN>"
+/docs
 ```
 
 ---
 
-## Technology Stack
+## PDF Audit Reporting
 
-| Area | Technology |
-|---|---|
-| Backend | FastAPI |
-| Database | SQLite |
-| ORM | SQLAlchemy |
-| Frontend | Jinja2, Bootstrap 5, Chart.js |
-| Authentication | Sessions, JWT |
-| Reports | ReportLab |
-| Testing | Pytest |
-| Linting | Ruff |
-| DevOps | Docker, Docker Compose |
-| CI/CD | GitHub Actions |
+Generate professional audit reports including
+
+* Executive Summary
+* Asset Inventory
+* Enterprise Risk Register
+* Critical Risks
+* Security Controls
+* Audit Findings
+* Recommendations
+* Report Generation Date
 
 ---
 
-## Local Setup
+# Technology Stack
+
+### Backend
+
+* FastAPI
+* SQLAlchemy
+* Pydantic
+
+### Database
+
+* SQLite
+
+### Frontend
+
+* Jinja2
+* Bootstrap 5
+
+### Authentication
+
+* JWT
+* Session Authentication
+* Password Hashing
+
+### Reporting
+
+* ReportLab
+
+### DevOps
+
+* Docker
+* Docker Compose
+* GitHub Actions
+
+### Testing
+
+* Pytest
+
+---
+
+# Project Structure
+
+```
+CyberRisk-Manager/
+
+├── app/
+├── docs/
+├── tests/
+├── screenshots/
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# Screenshots
+
+## Login
+
+![Login](screenshots/login.png)
+
+---
+
+## Executive Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+## Asset Management
+
+![Assets](screenshots/assets.png)
+
+---
+
+## Enterprise Risk Register
+
+![Risks](screenshots/risks.png)
+
+---
+
+## Security Controls
+
+![Controls](screenshots/controls.png)
+
+---
+
+## Audit Findings
+
+![Findings](screenshots/findings.png)
+
+---
+
+## Audit Logs
+
+![Audit Logs](screenshots/audit-logs.png)
+
+---
+
+## REST API Documentation
+
+![API](screenshots/api-docs.png)
+
+---
+
+## JWT Authentication
+
+![JWT](screenshots/jwt-token.png)
+
+---
+
+## PDF Audit Report
+
+![Report](screenshots/audit-report.png)
+
+---
+
+# Installation
+
+Clone the repository
 
 ```bash
 git clone https://github.com/Ahmed-Gonga/CyberRisk-Manager.git
-cd CyberRisk-Manager
-python3 -m venv venv
-source venv/bin/activate
+```
+
+Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+Run the application
+
+```bash
 uvicorn app.main:app --reload
 ```
 
-Open:
+Open
 
-```text
+```
 http://127.0.0.1:8000
 ```
 
 ---
 
-## Docker Setup
+# Docker
 
 ```bash
 docker compose up --build
 ```
 
-Open:
-
-```text
-http://127.0.0.1:8000
-```
-
 ---
 
-## Testing and Linting
+# Running Tests
 
 ```bash
-python -m pytest
-ruff check app tests
+pytest
 ```
 
 ---
 
-## Project Documentation
+# Default Demo Accounts
 
-Additional documentation is available under:
-
-- `docs/Architecture.md`
-- `docs/Risk_Methodology.md`
-- `docs/Threat_Model.md`
-- `docs/Security_Controls.md`
-
----
-
-## Why This Project Is Relevant
-
-This project demonstrates hands-on skills in:
-
-- Cybersecurity Consulting
-- Governance, Risk and Compliance
-- IT Audit
-- Security Governance
-- Risk Management
-- Control Assessment
-- Audit Reporting
-- Secure Backend Development
-- DevSecOps fundamentals
+| Username    | Password   | Role         |
+| ----------- | ---------- | ------------ |
+| admin       | admin123   | Admin        |
+| auditor     | auditor123 | Auditor      |
+| riskmanager | risk123    | Risk Manager |
+| viewer      | viewer123  | Viewer       |
 
 ---
 
-## Security Disclaimer
+# Documentation
 
-This project is intended for educational, demonstration, and portfolio purposes. It is not production-ready without additional security hardening, secrets management, secure deployment architecture, monitoring, logging controls, access governance, rate limiting, and infrastructure security controls.
+The repository includes comprehensive documentation covering
+
+* System Architecture
+* Risk Assessment Methodology
+* Threat Model
+* Security Controls
+* Deployment Guidance
 
 ---
 
-## Author
+# Security
 
-Ahmed Wahba
+CyberRisk Manager Enterprise demonstrates implementation of modern security practices including
 
-Cybersecurity | IT Audit | GRC | Risk Management
+* Password Hashing
+* JWT Authentication
+* Role-Based Access Control
+* Audit Logging
+* Input Validation
+* Secure Session Management
+* Environment Variable Configuration
+* REST API Security
 
-GitHub: https://github.com/Ahmed-Gonga
+---
+
+# About the Author
+
+## Ahmed Wahba
+
+Cybersecurity Engineer | IT Auditor | Governance, Risk & Compliance (GRC) | Information Security
+
+GitHub
+
+https://github.com/Ahmed-Gonga
+
+---
+
+## Project Purpose
+
+CyberRisk Manager Enterprise serves as a production-style reference implementation demonstrating enterprise cybersecurity governance, cyber risk management, IT audit processes, secure software engineering, and GRC workflows using modern technologies and security best practices.
